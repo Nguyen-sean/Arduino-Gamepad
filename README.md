@@ -22,3 +22,6 @@ GPIO_A4: SDA-I2c
 GPIO_A5: SCL-I2c  
 GPIO_A6: Potentionmeter_Right  
 GPIO_A7: Potentionmeter_Left  
+
+## EEPROM
+- xvzxvdv
