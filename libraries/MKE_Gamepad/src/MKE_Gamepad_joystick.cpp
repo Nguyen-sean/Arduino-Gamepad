@@ -23,7 +23,7 @@ float MKE_Gamepad_joystick::analogRead_Oy()
     return analogRead(joystickYPin) - yCenter;
 }
 
-float MKE_Gamepad_joystick::AngleDed()
+int MKE_Gamepad_joystick::AngleDed()
 {
     // Chuyển đổi giá trị theo tọa độ trung tâm
     x = analogRead_Ox();
@@ -47,7 +47,7 @@ float MKE_Gamepad_joystick::AngleDed()
     return angleDeg;
 }
 
-float MKE_Gamepad_joystick::Radius()
+int MKE_Gamepad_joystick::Radius()
 {
     x = analogRead_Ox();
     y = analogRead_Oy();

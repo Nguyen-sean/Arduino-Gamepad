@@ -16,8 +16,8 @@ private:
     int yCenter = 512; // Giá trị trung tâm mặc định cho trục Y
     int max_radius = 512;
 
-    float radius;
-    float angleDeg;
+    int radius;
+    int angleDeg;
     void Joystick_configureCenter(); // Hàm cấu hình tọa độ trung tâm
 
 public:
@@ -27,13 +27,13 @@ public:
 
     float analogRead_Oy();
 
-    float AngleDed();
+    int AngleDed();
 
-    float Radius();
-    float Radius_approximately(uint8_t num_approximately){
+    int Radius();
+    int Radius_approximately(uint8_t num_approximately){
         return map(Radius(),0,max_radius,0,num_approximately);
     }
-    
+
     void Serial_debug();
   
 
