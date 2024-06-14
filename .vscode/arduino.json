@@ -1,0 +1,6 @@
+{
+    "board": "arduino:avr:uno",
+    "programmer": "avrispmkii",
+    "sketch": "examples\\Read_joystick\\Read_joystick.ino",
+    "port": "COM9"
+}
