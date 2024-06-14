@@ -27,7 +27,7 @@ void setup()
   }
   delay(500); // Chờ để tránh nhầm lẫn từ lần nhấn nút
 
-  configureCenter();
+  Joystick_configureCenter ();
   Serial.println("Cấu hình hoàn tất.");
 }
 
@@ -46,10 +46,8 @@ void loop()
   {
     // Tính bán kính (khoảng cách từ gốc tọa độ)
     radius = sqrt(x * x + y * y);
-    if (radius > max_radius)
-    {
-      radius = max_radius;
-    }
+    if (radius > max_radius) radius = max_radius;
+  
 
     angleDeg = atan2(y, x) * (180.0 / PI);
 
@@ -65,17 +63,16 @@ void loop()
   Serial.print(x);
   Serial.print(" Y: ");
   Serial.print(y);
-  Serial.print(" Góc: ");
+  Serial.print(" || DEG: ");
   Serial.print(angleDeg);
-  Serial.print(" độ");
-  Serial.print(" Bán kính: ");
+  Serial.print(" || Radius: ");
   Serial.println(radius);
 
   // Đợi 200ms trước khi đọc lại
 }
 
 // Hàm cấu hình tọa độ trung tâm
-void configureCenter()
+void Joystick_configureCenter()
 {
   long xSum = 0;
   long ySum = 0;
