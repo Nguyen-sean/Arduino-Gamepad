@@ -24,9 +24,9 @@ void loop() {
   // Serial.print(MKE_Gamepad_joystick_R.Radius());
   // MKE_Gamepad_joystick_R.Serial_debug();
 
-  Serial.print(joystick_L.Radius());
+  Serial.print(joystick_L.AngleDed());
   Serial.print("  ||  ");
-  Serial.print(joystick_R.Radius());
+  Serial.print(joystick_R.AngleDed());
   Serial.print("  ||  ");
   Serial.print(Potential_L.readValue());
   Serial.print("  ||  ");

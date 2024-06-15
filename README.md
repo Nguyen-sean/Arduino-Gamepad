@@ -8,9 +8,9 @@ GPIO_D4: Button_1
 GPIO_D5: Button_2  
 GPIO_D6: Button_3  
 GPIO_D7: Button_4  
-GPIO_D8: CSN  
+GPIO_D8: Buzzer  
 GPIO_D9: CE  
-GPIO_D10: Buzzer  
+GPIO_D10: CSN  
 GPIO_D11: SPI-MOSI  
 GPIO_D12: SPI-MISO  
 GPIO_D13: SPI-SCK  

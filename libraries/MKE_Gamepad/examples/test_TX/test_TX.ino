@@ -10,7 +10,7 @@
  * MOSI - 11 SPI
  * MISO - 12 SPI
  */
-
+#include "MKE_Gamepad.h"
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
@@ -18,24 +18,15 @@
 RF24 radio(9, 10); // CE, CSN
 const byte diachi[6] = "12345"; //Mảng kí tự dạng chuỗi có 6 kí tự
 
-    struct DataPacket {
-    byte buttons;
-    int joyX1;
-    int joyY1;
-    int joyX2;
-    int joyY2;
-    int pot1;
-    int pot2;
-  } data;
   
 void setup() 
 {
   Serial.begin(115200);
   
-  if (!radio.begin()) 
+  while(!radio.begin()) 
   {
     Serial.println("Module không khởi động được...!!");
-    while (1) {}
+    delay(10);
   } 
   
   radio.openWritingPipe(diachi);
@@ -73,9 +64,7 @@ void setup()
 
 void loop() 
 {
-
-  const char text[] = "Hello Green Technology"; //Mảng chứa chuỗi kí tự
-  radio.write(&text, sizeof(text));
+  radio.write(&data, sizeof(data));
   // &: Trả lại địa chỉ của một biến.
   // sizeof: trả về số byte bộ nhớ của một biến 
   //hoặc là trả về tổng số byte bộ nhớ của một mảng
