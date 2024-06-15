@@ -100,3 +100,4 @@ void Reset_data_Gamepad()
 
     // Serial.println( Potential_R.readValue());
 }
+
