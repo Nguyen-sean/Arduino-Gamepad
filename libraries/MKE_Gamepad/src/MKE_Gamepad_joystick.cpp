@@ -66,7 +66,12 @@ int MKE_Gamepad_joystick::Radius()
             radius = max_radius;
         }
     }
-    return map(radius,0,max_radius,0,512);
+    return map(radius, 0, max_radius, 0, 512);
+}
+
+int MKE_Gamepad_joystick::Radius_approximately(uint8_t num_approximately)
+{
+    return map(Radius(), 0, max_radius, 0, num_approximately);
 }
 
 void MKE_Gamepad_joystick::Serial_debug()

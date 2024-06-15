@@ -1,5 +1,5 @@
-#ifndef MKE_Gamepad_SEAN__
-#define MKE_Gamepad_SEAN__
+#ifndef MKE_Gamepad_joystick_SEAN__
+#define MKE_Gamepad_joystick_SEAN__
 
 #include "Arduino.h"
 
@@ -14,7 +14,7 @@ private:
     float y;
     int xCenter = 512; // Giá trị trung tâm mặc định cho trục X
     int yCenter = 512; // Giá trị trung tâm mặc định cho trục Y
-    int max_radius = 512;
+    int max_radius = 512; // bán kính tối đa của Joystick
 
     int radius;
     int angleDeg;
@@ -30,9 +30,7 @@ public:
     int AngleDed();
 
     int Radius();
-    int Radius_approximately(uint8_t num_approximately){
-        return map(Radius(),0,max_radius,0,num_approximately);
-    }
+    int Radius_approximately(uint8_t num_approximately);
 
     void Serial_debug();
   
