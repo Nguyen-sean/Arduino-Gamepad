@@ -1,7 +1,7 @@
 # Arduino_Project_Template
 ## GPIO_Pinout
-GPIO_D0: RX/Joystick_left  
-GPIO_D1: TX/Joystick_right  
+GPIO_D1: RX/Joystick_left  
+GPIO_D0: TX/Joystick_right  
 GPIO_D2: Button90_Left  
 GPIO_D3: Button90_Right  
 GPIO_D4: Button_1  

@@ -22,7 +22,8 @@ const byte diachi[6] = "12345"; //Mảng kí tự dạng chuỗi có 6 kí tự
 void setup() 
 {
   Serial.begin(115200);
-  
+  Setup_Gamepad();
+
   while(!radio.begin()) 
   {
     Serial.println("Module không khởi động được...!!");
@@ -33,7 +34,7 @@ void setup()
   //Lệnh openWritingPipe mặc định là đường truyền 0
   //mở 1 kênh có địa chỉ 12345 trên đường truyền 0
   // kênh này ghi data lên địa chỉ 12345  
-  radio.setPALevel(RF24_PA_MIN); 
+  radio.setPALevel(RF24_PA_LOW); 
   //Cài bộ khuyết địa công suất ở mức MIN, MAX, HIGH, LOW
   radio.setChannel(80); // 125 kênh từ 0-124; TX và RX phải cùng kênh
                         // 2.4GHz ~ 2400Mhz, bước kênh là 1MHz
@@ -64,10 +65,13 @@ void setup()
 
 void loop() 
 {
-  radio.write(&data, sizeof(data));
+
+  getdata_Gamepad();
+  radio.write(&Data_MKE_Gamepad, sizeof(Data_MKE_Gamepad));
   // &: Trả lại địa chỉ của một biến.
   // sizeof: trả về số byte bộ nhớ của một biến 
   //hoặc là trả về tổng số byte bộ nhớ của một mảng
-  Serial.println("đã gửi");
+
+  // Serial.println(Data_MKE_Gamepad.buttons,BIN);
   // delay(1000);
 }
