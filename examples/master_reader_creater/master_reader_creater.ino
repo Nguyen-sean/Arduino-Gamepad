@@ -9,20 +9,9 @@
 
 // This example code is in the public domain.
 
-
+#include "MKE_Gamepad.h"
 #include <Wire.h>
 
-struct DataPacket {
-  byte buttons;
-  int DEG_Joy_L;
-  int RAD_Joy_L;
-  int RAD_Joy_R;
-  int DEG_Joy_R;
-  int pot_L;
-  int pot_R;
-};
-
-DataPacket Data_MKE_Gamepad;
 
 void setup() {
   Wire.begin();          // join I2C bus (address optional for master)

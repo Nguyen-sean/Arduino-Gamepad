@@ -31,6 +31,7 @@ MKE_Gamepad_Potential Potential_R;
 byte buttonStates = 0;
 struct DataPacket
 {
+
     byte buttons;
     int DEG_Joy_L;
     int RAD_Joy_L;
@@ -38,6 +39,7 @@ struct DataPacket
     int DEG_Joy_R;
     int pot_L;
     int pot_R;
+    // bool Is_connect_NRF;
 } Data_MKE_Gamepad;
 
 void Setup_Gamepad()
@@ -72,6 +74,29 @@ void getdata_Gamepad()
     Data_MKE_Gamepad.RAD_Joy_R = joystick_R.Radius();
     Data_MKE_Gamepad.pot_L = Potential_L.readValue();
     Data_MKE_Gamepad.pot_R = Potential_R.readValue();
+
+    // Serial.println( Potential_R.readValue());
+}
+
+void Reset_data_Gamepad()
+{
+    bitWrite(buttonStates, 0, 1);
+    bitWrite(buttonStates, 1, 1);
+    bitWrite(buttonStates, 2, 1);
+    bitWrite(buttonStates, 3, 1);
+    bitWrite(buttonStates, 4, 1);
+    bitWrite(buttonStates, 5, 1);
+    bitWrite(buttonStates, 6, 1);
+    bitWrite(buttonStates, 7, 1);
+
+    Data_MKE_Gamepad.buttons = buttonStates;
+    
+    Data_MKE_Gamepad.DEG_Joy_L = 0;
+    Data_MKE_Gamepad.RAD_Joy_L = 0;
+    Data_MKE_Gamepad.DEG_Joy_R = 0;
+    Data_MKE_Gamepad.RAD_Joy_R = 0;
+    Data_MKE_Gamepad.pot_L = 0;
+    Data_MKE_Gamepad.pot_R = 0;
 
     // Serial.println( Potential_R.readValue());
 }
