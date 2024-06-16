@@ -64,7 +64,7 @@ void loop() {
     // Serial.println(Data_MKE_Gamepad.buttons, BIN);
   }
 
-  Radius_joystick = Data_MKE_Gamepad.DEG_Joy_L;
+  Radius_joystick = Get_DEG_Joy_L();
   if (Radius_joystick >= 337.5 || Radius_joystick <= 22.5) {
     command = 'R';
     right();
@@ -91,8 +91,8 @@ void loop() {
     backright();
   }
 
-  if (Data_MKE_Gamepad.RAD_Joy_L > 30) {
-    Speed = map(Data_MKE_Gamepad.RAD_Joy_L, 30, 512, 100, 255);
+  if (Get_RAD_Joy_L() > 30) {
+    Speed = map(Data_MKE_Gamepad.RAD_Joy_L, 30, 512, 130, 255);
   } else {
     Speed = 0;
   }

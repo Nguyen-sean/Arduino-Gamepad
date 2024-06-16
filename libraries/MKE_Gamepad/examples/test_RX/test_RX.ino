@@ -43,16 +43,10 @@ void setup() {
   radio.setChannel(80);
   radio.setDataRate(RF24_250KBPS);
   radio.startListening();
-
-  if (!radio.available()) {
-    Serial.println("Chưa kết nối được với TX...!!");
-    Serial.println("CHỜ KẾT NỐI.......");
-  }
 }
 
 void loop() {
   if (radio.available()) {
-    // char nhan[] = ""; //30 là số kí tự trong mảng
     radio.read(&Data_MKE_Gamepad, sizeof(Data_MKE_Gamepad));
     Serial.print(Data_MKE_Gamepad.DEG_Joy_L);
     Serial.print(" || ");
@@ -70,24 +64,6 @@ void loop() {
     lastReceivedTime = millis();
   } 
 
-  // else{Serial.println("No data received or NRF24L01 is disconnected");}
-
-  // else {
-  //   Reset_data_Gamepad();
-  //   Serial.print(Data_MKE_Gamepad.DEG_Joy_L);
-  //   Serial.print(" || ");
-  //   Serial.print(Data_MKE_Gamepad.RAD_Joy_L);
-  //   Serial.print(" ||<==>|| ");
-  //   Serial.print(Data_MKE_Gamepad.DEG_Joy_R);
-  //   Serial.print(" || ");
-  //   Serial.print(Data_MKE_Gamepad.RAD_Joy_R);
-  //   Serial.print(" || ");
-  //   Serial.print(Data_MKE_Gamepad.pot_L);
-  //   Serial.print(" || ");
-  //   Serial.print(Data_MKE_Gamepad.pot_R);
-  //   Serial.print(" || ");
-  //   Serial.println(Data_MKE_Gamepad.buttons, BIN);
-  // }
 if (millis() - lastReceivedTime > 100) {
       Serial.println("NRF24L01 is disconnected");
       Reset_data_Gamepad();
