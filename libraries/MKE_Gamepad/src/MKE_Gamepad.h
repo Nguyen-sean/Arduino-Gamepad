@@ -57,15 +57,14 @@ void Setup_Gamepad()
 
 void getdata_Gamepad()
 {
-
-    bitWrite(buttonStates, 0, digitalRead(button_1));
-    bitWrite(buttonStates, 1, digitalRead(button_2));
-    bitWrite(buttonStates, 2, digitalRead(button_3));
-    bitWrite(buttonStates, 3, digitalRead(button_4));
-    bitWrite(buttonStates, 4, digitalRead(button_90D_Left));
-    bitWrite(buttonStates, 5, digitalRead(button_90D_Right));
-    bitWrite(buttonStates, 6, digitalRead(Pin_Joystick_Button_Left));
-    bitWrite(buttonStates, 7, digitalRead(Pin_Joystick_Button_Right));
+    bitWrite(buttonStates, 0, map(digitalRead(button_1),0,1,1,0));
+    bitWrite(buttonStates, 1, map(digitalRead(button_2),0,1,1,0));
+    bitWrite(buttonStates, 2, map(digitalRead(button_3),0,1,1,0));
+    bitWrite(buttonStates, 3, map(digitalRead(button_4),0,1,1,0));
+    bitWrite(buttonStates, 4, map(digitalRead(button_90D_Left),0,1,1,0));
+    bitWrite(buttonStates, 5, map(digitalRead(button_90D_Right),0,1,1,0));
+    bitWrite(buttonStates, 6, map(digitalRead(Pin_Joystick_Button_Left),0,1,1,0));
+    bitWrite(buttonStates, 7, map(digitalRead(Pin_Joystick_Button_Right),0,1,1,0));
 
     Data_MKE_Gamepad.buttons = buttonStates;
     Data_MKE_Gamepad.DEG_Joy_L = joystick_L.AngleDed();
@@ -75,10 +74,9 @@ void getdata_Gamepad()
     Data_MKE_Gamepad.pot_L = Potential_L.readValue();
     Data_MKE_Gamepad.pot_R = Potential_R.readValue();
 
-    // Serial.println( Potential_R.readValue());
 }
 
-void Reset_data_Gamepad()
+void Reset_data_Gamepad() // đưa tất cả giá trị về 0
 {
     bitWrite(buttonStates, 0, 1);
     bitWrite(buttonStates, 1, 1);
@@ -88,7 +86,6 @@ void Reset_data_Gamepad()
     bitWrite(buttonStates, 5, 1);
     bitWrite(buttonStates, 6, 1);
     bitWrite(buttonStates, 7, 1);
-
     Data_MKE_Gamepad.buttons = buttonStates;
 
     Data_MKE_Gamepad.DEG_Joy_L = 0;
@@ -105,13 +102,13 @@ int Get_POT_L() { return Data_MKE_Gamepad.pot_L; }
 int Get_POT_R() { return Data_MKE_Gamepad.pot_R; }
 int Get_DEG_Joy_L() { return Data_MKE_Gamepad.DEG_Joy_L; }
 int Get_DEG_Joy_R() { return Data_MKE_Gamepad.DEG_Joy_R; }
-int Get_RAD_Joy_L() { return Data_MKE_Gamepad.DEG_Joy_L; }
-int Get_RAD_Joy_R() { return Data_MKE_Gamepad.DEG_Joy_R; }
-uint8_t Get_status_button_1() { return bitRead(buttonStates, 0); }
-uint8_t Get_status_button_2() { return bitRead(buttonStates, 1); }
-uint8_t Get_status_button_3() { return bitRead(buttonStates, 2); }
-uint8_t Get_status_button_4() { return bitRead(buttonStates, 3); }
-uint8_t Get_status_button_90D_Left() { return bitRead(buttonStates, 4); }
-uint8_t Get_status_button_90D_Right() { return bitRead(buttonStates, 5); }
-uint8_t Get_status_Joystick_Button_Left() { return bitRead(buttonStates, 6); }
-uint8_t Get_status_Joystick_Button_Right() { return bitRead(buttonStates, 7); }
+int Get_RAD_Joy_L() { return Data_MKE_Gamepad.RAD_Joy_L; }
+int Get_RAD_Joy_R() { return Data_MKE_Gamepad.RAD_Joy_R; }
+bool Get_status_button_2() { return bitRead(buttonStates, 1); }
+bool Get_status_button_3() { return bitRead(buttonStates, 2); }
+bool Get_status_button_1() { return bitRead(buttonStates, 0); }
+bool Get_status_button_4() { return bitRead(buttonStates, 3); }
+bool Get_status_button_90D_Left() { return bitRead(buttonStates, 4); }
+bool Get_status_button_90D_Right() { return bitRead(buttonStates, 5); }
+bool Get_status_Joystick_Button_Left() { return bitRead(buttonStates, 6); }
+bool Get_status_Joystick_Button_Right() { return bitRead(buttonStates, 7); }

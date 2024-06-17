@@ -22,7 +22,7 @@ void Stop();
 #define pwm_2 5
 
 int command;
-float Radius_joystick;
+float DEG_joystick;
 int Speed = 150;
 
 char servo_compare = 'B';
@@ -49,50 +49,51 @@ void loop() {
   Wire.requestFrom(8, sizeof(Data_MKE_Gamepad));
   while (Wire.available()) {  // slave may send less than requested
     Wire.readBytes((char *)&Data_MKE_Gamepad, sizeof(Data_MKE_Gamepad));
-    // Serial.print(Data_MKE_Gamepad.DEG_Joy_L);
-    // Serial.print(" || ");
-    // Serial.print(Data_MKE_Gamepad.RAD_Joy_L);
-    // Serial.print(" ||<==>|| ");
-    // Serial.print(Data_MKE_Gamepad.DEG_Joy_R);
-    // Serial.print(" || ");
-    // Serial.print(Data_MKE_Gamepad.RAD_Joy_R);
-    // Serial.print(" || ");
-    // Serial.print(Data_MKE_Gamepad.pot_L);
-    // Serial.print(" || ");
-    // Serial.print(Data_MKE_Gamepad.pot_R);
-    // Serial.print(" || ");
-    // Serial.println(Data_MKE_Gamepad.buttons, BIN);
+    Serial.print(Data_MKE_Gamepad.DEG_Joy_L);
+    Serial.print(" || ");
+    Serial.print(Data_MKE_Gamepad.RAD_Joy_L);
+    Serial.print(" ||<==>|| ");
+    Serial.print(Data_MKE_Gamepad.DEG_Joy_R);
+    Serial.print(" || ");
+    Serial.print(Data_MKE_Gamepad.RAD_Joy_R);
+    Serial.print(" || ");
+    Serial.print(Data_MKE_Gamepad.pot_L);
+    Serial.print(" || ");
+    Serial.print(Data_MKE_Gamepad.pot_R);
+    Serial.print(" || ");
+    Serial.println(Data_MKE_Gamepad.buttons, BIN);
   }
 
-  Radius_joystick = Get_DEG_Joy_L();
-  if (Radius_joystick >= 337.5 || Radius_joystick <= 22.5) {
+  DEG_joystick = constrain(Data_MKE_Gamepad.DEG_Joy_L,0,360);
+  if ((DEG_joystick >= 337.5) || (DEG_joystick < 22.5)) {
     command = 'R';
     right();
-  } else if (Radius_joystick >= 22.5 && Radius_joystick < 67.5) {
+  } 
+  else if (DEG_joystick >= 22.5 && DEG_joystick < 67.5) {
     command = 'I';
     forwardright();
-  } else if (Radius_joystick >= 67.5 && Radius_joystick < 112.5) {
+  } else if (DEG_joystick >= 67.5 && DEG_joystick < 112.5) {
     command = 'F';
     forward();
-  } else if (Radius_joystick >= 112.5 && Radius_joystick < 157.5) {
+  } else if (DEG_joystick >= 112.5 && DEG_joystick < 157.5) {
     command = 'G';
     forwardleft();
-  } else if (Radius_joystick >= 157.5 && Radius_joystick < 202.5) {
+  } else if (DEG_joystick >= 157.5 && DEG_joystick < 202.5) {
     command = 'L';
     left();
-  } else if (Radius_joystick >= 202.5 && Radius_joystick < 247.5) {
+  } else if (DEG_joystick >= 202.5 && DEG_joystick < 247.5) {
     command = 'H';
     backleft();
-  } else if (Radius_joystick >= 247.5 && Radius_joystick < 292.5) {
+  } else if (DEG_joystick >= 247.5 && DEG_joystick < 292.5) {
     command = 'B';
     back();
-  } else if (Radius_joystick >= 292.5 && Radius_joystick < 337.5) {
+  } else if (DEG_joystick >= 292.5 && DEG_joystick < 337.5) {
     command = 'J';
     backright();
   }
 
   if (Get_RAD_Joy_L() > 30) {
-    Speed = map(Data_MKE_Gamepad.RAD_Joy_L, 30, 512, 130, 255);
+    Speed = map(Get_RAD_Joy_L(), 30, 512, 130, 255);
   } else {
     Speed = 0;
   }
