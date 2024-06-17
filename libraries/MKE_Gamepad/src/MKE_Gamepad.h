@@ -57,14 +57,15 @@ void Setup_Gamepad()
 
 void getdata_Gamepad()
 {
-    bitWrite(buttonStates, 0, map(digitalRead(button_1),0,1,1,0));
-    bitWrite(buttonStates, 1, map(digitalRead(button_2),0,1,1,0));
-    bitWrite(buttonStates, 2, map(digitalRead(button_3),0,1,1,0));
-    bitWrite(buttonStates, 3, map(digitalRead(button_4),0,1,1,0));
-    bitWrite(buttonStates, 4, map(digitalRead(button_90D_Left),0,1,1,0));
-    bitWrite(buttonStates, 5, map(digitalRead(button_90D_Right),0,1,1,0));
-    bitWrite(buttonStates, 6, map(digitalRead(Pin_Joystick_Button_Left),0,1,1,0));
-    bitWrite(buttonStates, 7, map(digitalRead(Pin_Joystick_Button_Right),0,1,1,0));
+
+    bitWrite(buttonStates, 0, digitalRead(button_1));
+    bitWrite(buttonStates, 1, digitalRead(button_2));
+    bitWrite(buttonStates, 2, digitalRead(button_3));
+    bitWrite(buttonStates, 3, digitalRead(button_4));
+    bitWrite(buttonStates, 4, digitalRead(button_90D_Left));
+    bitWrite(buttonStates, 5, digitalRead(button_90D_Right));
+    bitWrite(buttonStates, 6, digitalRead(Pin_Joystick_Button_Left));
+    bitWrite(buttonStates, 7, digitalRead(Pin_Joystick_Button_Right));
 
     Data_MKE_Gamepad.buttons = buttonStates;
     Data_MKE_Gamepad.DEG_Joy_L = joystick_L.AngleDed();
@@ -76,7 +77,7 @@ void getdata_Gamepad()
 
 }
 
-void Reset_data_Gamepad() // đưa tất cả giá trị về 0
+void Reset_data_Gamepad() // đưa tất cả giá trị về low
 {
     bitWrite(buttonStates, 0, 1);
     bitWrite(buttonStates, 1, 1);
