@@ -2,7 +2,7 @@
 /*
  * https://maniacbug.github.io/RF24/classRF24.html
  * 
- * VCC - 3.3v
+ * VCC - 3.3v 
  * GND - GND
  * CSN - 8
  * CE - 7
@@ -31,11 +31,15 @@ void setup()
   } 
   
   radio.openWritingPipe(diachi);
-  //Lệnh openWritingPipe mặc định là đường truyền 0
+  //openWritingPipe defaul là đường truyền 0
   //mở 1 kênh có địa chỉ 12345 trên đường truyền 0
   // kênh này ghi data lên địa chỉ 12345  
-  radio.setPALevel(RF24_PA_LOW); 
-  //Cài bộ khuyết địa công suất ở mức MIN, MAX, HIGH, LOW
+  radio.setPALevel(RF24_PA_LOW);
+  // RF24_PA_<MIN
+  // RF24_PA_LOW
+  // RF24_PA_HIGH
+  // RF24_PA_MAX
+  // Power of NRF24 at MIN, MAX, HIGH, LOW
   radio.setChannel(80); // 125 kênh từ 0-124; TX và RX phải cùng kênh
                         // 2.4GHz ~ 2400Mhz, bước kênh là 1MHz
                         // setchannel(1) => 2401Mhz
