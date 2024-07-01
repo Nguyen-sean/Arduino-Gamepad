@@ -113,18 +113,18 @@ public:
     int Get_DEG_Joy_R() { return Data_MKL_Gamepad.DEG_Joy_R; }
     int Get_RAD_Joy_L() { return Data_MKL_Gamepad.RAD_Joy_L; }
     int Get_RAD_Joy_R() { return Data_MKL_Gamepad.RAD_Joy_R; }
-    bool Get_status_button_1() { return bitRead(Data_MKL_Gamepad.buttons, 0); }
-    bool Get_status_button_2() { return bitRead(Data_MKL_Gamepad.buttons, 1); }
-    bool Get_status_button_3() { return bitRead(Data_MKL_Gamepad.buttons, 2); }
-    bool Get_status_button_4() { return bitRead(Data_MKL_Gamepad.buttons, 3); }
-    bool Get_status_button_90D_Left() { return bitRead(Data_MKL_Gamepad.buttons, 4); }
-    bool Get_status_button_90D_Right() { return bitRead(Data_MKL_Gamepad.buttons, 5); }
-    bool Get_status_Joystick_Button_Left() { return bitRead(Data_MKL_Gamepad.buttons, 6); }
-    bool Get_status_Joystick_Button_Right() { return bitRead(Data_MKL_Gamepad.buttons, 7); }
+    bool Get_status_button_1() { return !bitRead(Data_MKL_Gamepad.buttons, 0); }
+    bool Get_status_button_2() { return !bitRead(Data_MKL_Gamepad.buttons, 1); }
+    bool Get_status_button_3() { return !bitRead(Data_MKL_Gamepad.buttons, 2); }
+    bool Get_status_button_4() { return !bitRead(Data_MKL_Gamepad.buttons, 3); }
+    bool Get_status_button_90D_Left() { return !bitRead(Data_MKL_Gamepad.buttons, 4); }
+    bool Get_status_button_90D_Right() { return !bitRead(Data_MKL_Gamepad.buttons, 5); }
+    bool Get_status_Joystick_Button_Left() { return !bitRead(Data_MKL_Gamepad.buttons, 6); }
+    bool Get_status_Joystick_Button_Right() { return !bitRead(Data_MKL_Gamepad.buttons, 7); }
 
     void getdata_Gamepad_I2C()
     {
-        Wire.requestFrom(8, sizeof(Data_MKL_Gamepad));
+        Wire.requestFrom(I2C_ADDRESS, sizeof(Data_MKL_Gamepad));
         while (Wire.available())
         { // slave may send less than requested
             Wire.readBytes((char *)&Data_MKL_Gamepad, sizeof(Data_MKL_Gamepad));
