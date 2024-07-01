@@ -72,7 +72,7 @@ void loop()
   DEG_joystick = constrain(Gamepad.Get_DEG_Joy_L(), 0, 360);
   if ((DEG_joystick >= 337.5) || (DEG_joystick < 22.5))
   {
-    command = 'R';
+
     right();
   }
   else if (DEG_joystick >= 22.5 && DEG_joystick < 67.5)
