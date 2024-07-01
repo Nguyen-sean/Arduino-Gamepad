@@ -1,11 +1,11 @@
 #ifndef SimpleKalmanFilter_h
 #define SimpleKalmanFilter_h
 
-class MKE_SimpleKalmanFilter
+class MKL_SimpleKalmanFilter
 {
 
 public:
-  MKE_SimpleKalmanFilter(float mea_e, float est_e, float q);
+  MKL_SimpleKalmanFilter(float mea_e, float est_e, float q);
   float updateEstimate(float mea);
   void setMeasurementError(float mea_e);
   void setEstimateError(float est_e);

@@ -1,8 +1,8 @@
 #include <Arduino.h>
 
-#include <MKE_SimpleKalmanFilter.h>
-MKE_SimpleKalmanFilter SimpleKalmanFilter_Ox(2, 2, 0.01);
-MKE_SimpleKalmanFilter SimpleKalmanFilter_Oy(2, 2, 0.01);
+#include <MKL_SimpleKalmanFilter.h>
+MKL_SimpleKalmanFilter SimpleKalmanFilter_Ox(2, 2, 0.01);
+MKL_SimpleKalmanFilter SimpleKalmanFilter_Oy(2, 2, 0.01);
 
 const int joystickXPin = A0;
 const int joystickYPin = A1;

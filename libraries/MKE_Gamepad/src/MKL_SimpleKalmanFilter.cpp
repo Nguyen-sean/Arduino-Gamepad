@@ -1,15 +1,15 @@
 #include "Arduino.h"
-#include "MKE_SimpleKalmanFilter.h"
+#include "MKL_SimpleKalmanFilter.h"
 #include <math.h>
 
-MKE_SimpleKalmanFilter::MKE_SimpleKalmanFilter(float mea_e, float est_e, float q)
+MKL_SimpleKalmanFilter::MKL_SimpleKalmanFilter(float mea_e, float est_e, float q)
 {
   _err_measure = mea_e;
   _err_estimate = est_e;
   _q = q;
 }
 
-float MKE_SimpleKalmanFilter::updateEstimate(float mea)
+float MKL_SimpleKalmanFilter::updateEstimate(float mea)
 {
   _kalman_gain = _err_estimate / (_err_estimate + _err_measure);
   _current_estimate = _last_estimate + _kalman_gain * (mea - _last_estimate);
@@ -19,22 +19,22 @@ float MKE_SimpleKalmanFilter::updateEstimate(float mea)
   return _current_estimate;
 }
 
-void MKE_SimpleKalmanFilter::setMeasurementError(float mea_e)
+void MKL_SimpleKalmanFilter::setMeasurementError(float mea_e)
 {
   _err_measure = mea_e;
 }
 
-void MKE_SimpleKalmanFilter::setEstimateError(float est_e)
+void MKL_SimpleKalmanFilter::setEstimateError(float est_e)
 {
   _err_estimate = est_e;
 }
 
-void MKE_SimpleKalmanFilter::setProcessNoise(float q)
+void MKL_SimpleKalmanFilter::setProcessNoise(float q)
 {
   _q = q;
 }
 
-float MKE_SimpleKalmanFilter::getKalmanGain()
+float MKL_SimpleKalmanFilter::getKalmanGain()
 {
   return _kalman_gain;
 }

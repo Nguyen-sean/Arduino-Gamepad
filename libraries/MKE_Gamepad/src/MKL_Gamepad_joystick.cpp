@@ -1,6 +1,6 @@
-#include "MKE_Gamepad_joystick.h"
+#include "MKL_Gamepad_joystick.h"
 
-void MKE_Gamepad_joystick::setup(uint8_t joystickXPin_, uint8_t joystickYPin_, uint8_t buttonPin_)
+void MKL_Gamepad_joystick::setup(uint8_t joystickXPin_, uint8_t joystickYPin_, uint8_t buttonPin_)
 {
     joystickXPin = joystickXPin_;
     joystickYPin = joystickYPin_;
@@ -13,17 +13,17 @@ void MKE_Gamepad_joystick::setup(uint8_t joystickXPin_, uint8_t joystickYPin_, u
     Joystick_configureCenter(); // config tọa độ gốc
 }
 
-float MKE_Gamepad_joystick::analogRead_Ox()
+float MKL_Gamepad_joystick::analogRead_Ox()
 {
     return map(analogRead(joystickXPin), 0, 1024, 1024, 0) - xCenter;
 }
 
-float MKE_Gamepad_joystick::analogRead_Oy()
+float MKL_Gamepad_joystick::analogRead_Oy()
 {
     return analogRead(joystickYPin) - yCenter;
 }
 
-int MKE_Gamepad_joystick::AngleDed()
+int MKL_Gamepad_joystick::AngleDed()
 {
     // Chuyển đổi giá trị theo tọa độ trung tâm
     x = analogRead_Ox();
@@ -47,7 +47,7 @@ int MKE_Gamepad_joystick::AngleDed()
     return angleDeg;
 }
 
-int MKE_Gamepad_joystick::Radius()
+int MKL_Gamepad_joystick::Radius()
 {
     x = analogRead_Ox();
     y = analogRead_Oy();
@@ -69,12 +69,12 @@ int MKE_Gamepad_joystick::Radius()
     return map(radius, 0, max_radius, 0, 512);
 }
 
-int MKE_Gamepad_joystick::Radius_approximately(uint8_t num_approximately)
+int MKL_Gamepad_joystick::Radius_approximately(uint8_t num_approximately)
 {
     return map(Radius(), 0, max_radius, 0, num_approximately);
 }
 
-void MKE_Gamepad_joystick::Serial_debug()
+void MKL_Gamepad_joystick::Serial_debug()
 {
 
     // In kết quả
@@ -87,7 +87,7 @@ void MKE_Gamepad_joystick::Serial_debug()
     Serial.print(" || Radius: ");
     Serial.println(Radius());
 }
-void MKE_Gamepad_joystick::Joystick_configureCenter()
+void MKL_Gamepad_joystick::Joystick_configureCenter()
 {
     long xSum = 0;
     long ySum = 0;
