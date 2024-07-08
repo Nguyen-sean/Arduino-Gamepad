@@ -9,26 +9,26 @@
 class MKL_Gamepad
 {
 private:
-uint8_t I2C_ADDRESS = 8;
+    uint8_t I2C_ADDRESS = 8; // I2C address 
 
-#define Pin_Joystick_Ox_Left (A0)
-#define Pin_Joystick_Oy_Left (A1)
-#define Pin_Joystick_Button_Left (1)
+    uint8_t Pin_Joystick_Ox_Left = A0;
+    uint8_t Pin_Joystick_Oy_Left = A1;
+    uint8_t Pin_Joystick_Button_Left = 1;
 
-#define Pin_Joystick_Ox_Right (A2)
-#define Pin_Joystick_Oy_Right (A3)
-#define Pin_Joystick_Button_Right (0)
+    uint8_t Pin_Joystick_Ox_Right = A2;
+    uint8_t Pin_Joystick_Oy_Right = A3;
+    uint8_t Pin_Joystick_Button_Right = 0;
 
-#define Pin_Pot_left (A7)
-#define Pin_Pot_right (A6)
+    uint8_t Pin_Pot_left = A7;
+    uint8_t Pin_Pot_right = A6;
 
-#define button_1 (4)
-#define button_2 (5)
-#define button_3 (6)
-#define button_4 (7)
+    uint8_t button_1 = 4;
+    uint8_t button_2 = 5;
+    uint8_t button_3 = 6;
+    uint8_t button_4 = 7;
 
-#define button_90D_Left (2)
-#define button_90D_Right (3)
+    uint8_t button_90D_Left = 2;
+    uint8_t button_90D_Right = 3;
 
     const int buttonPins[8] = {button_1, button_2, button_3, button_4, button_90D_Left, button_90D_Right, Pin_Joystick_Button_Left, Pin_Joystick_Button_Right};
 
@@ -136,7 +136,6 @@ public:
     //     Wire.begin(I2C_ADDRESS); // join I2C bus with address #8
     //     Wire.onRequest(requestEvent);
     // }
-
 };
 
 #endif

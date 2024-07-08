@@ -10,7 +10,7 @@ private:
     uint8_t _pin;
 
 public:
-    MKL_Gamepad_Potential() : KalmanFilter(2, 2, 0.01) {} // Khởi tạo KalmanFilter trong hàm tạo
+    MKL_Gamepad_Potential() : KalmanFilter(1, 2, 0.01) {} // Khởi tạo KalmanFilter trong hàm tạo
     void setup(uint8_t pin);
 
     int readValue();
