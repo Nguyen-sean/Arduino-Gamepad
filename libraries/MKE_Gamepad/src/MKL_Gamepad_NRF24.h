@@ -23,6 +23,10 @@ private:
 public:
     void RF_writing();
     void Change_address_RF();
+    void Config_NRF(uint8_t CE, uint8_t CSN, int Address, int SetPAlever, int Setchannel, int SetDataRate)
+    {
+        RF24 radio(9, 10);
+    }
     // void Se
 };
 

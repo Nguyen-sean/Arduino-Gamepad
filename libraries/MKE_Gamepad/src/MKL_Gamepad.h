@@ -2,15 +2,25 @@
 #define MKL_Gamepad_SEAN__
 
 #include <Wire.h>
+
+#include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
+
 #include "MKL_Gamepad_joystick.h"
 #include "MKL_Gamepad_Potential.h"
-// #include "MKL_Gamepad_NRF24.h"
+#include "MKL_Gamepad_NRF24.h"
+
+
+//default 
+#define Default_Pin_CE 9
+#define Default_Pin_CSN 10
+uint8_t I2C_ADDRESS = 0x6C; // I2C address 
 
 class MKL_Gamepad
 {
 private:
-    uint8_t I2C_ADDRESS = 8; // I2C address 
-
+    
     uint8_t Pin_Joystick_Ox_Left = A0;
     uint8_t Pin_Joystick_Oy_Left = A1;
     uint8_t Pin_Joystick_Button_Left = 1;

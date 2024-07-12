@@ -4,8 +4,8 @@
  *
  * VCC - 3.3v
  * GND - GND
- * CSN - 8
- * CE - 7
+ * CSN - 10
+ * CE - 9
  * SCK - 13
  * MOSI - 11
  * MISO - 12
@@ -14,9 +14,6 @@
 
 #include <Wire.h>
 
-#include <SPI.h>
-#include <nRF24L01.h>
-#include <RF24.h>
 
 MKL_Gamepad Gamepad;
 

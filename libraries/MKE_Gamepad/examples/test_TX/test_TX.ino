@@ -4,18 +4,16 @@
  *
  * VCC - 3.3v
  * GND - GND
- * CSN - 8
- * CE - 7
+ * CSN - 10
+ * CE - 9
  * SCK - 13 mặc định SPI
  * MOSI - 11 SPI
  * MISO - 12 SPI
  */
 #include "MKL_Gamepad.h"
-#include <SPI.h>
-#include <nRF24L01.h>
-#include <RF24.h>
 
 MKL_Gamepad Gamepad;
+MKL_Gamepad_NRF24 MKL_NRF24;
 
 RF24 radio(9, 10);              // CE, CSN
 const byte diachi[6] = "12345"; // Mảng kí tự dạng chuỗi có 6 kí tự
