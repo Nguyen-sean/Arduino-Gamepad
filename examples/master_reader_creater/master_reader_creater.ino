@@ -20,24 +20,24 @@ void setup()
 
 void loop()
 {
-  Wire.requestFrom(8, sizeof(Data_MKL_Gamepad)); // request 6 bytes from slave device #8
+  Wire.requestFrom(8, sizeof(Data_MKL_Gamepad_push)); // request 6 bytes from slave device #8
 
   while (Wire.available())
   { // slave may send less than requested
-    Wire.readBytes((char *)&Data_MKL_Gamepad, sizeof(Data_MKL_Gamepad));
-    Serial.print(Data_MKL_Gamepad.DEG_Joy_L);
+    Wire.readBytes((char *)&Data_MKL_Gamepad_push, sizeof(Data_MKL_Gamepad_push));
+    Serial.print(Data_MKL_Gamepad_push.DEG_Joy_L);
     Serial.print(" || ");
-    Serial.print(Data_MKL_Gamepad.RAD_Joy_L);
+    Serial.print(Data_MKL_Gamepad_push.RAD_Joy_L);
     Serial.print(" ||<==>|| ");
-    Serial.print(Data_MKL_Gamepad.DEG_Joy_R);
+    Serial.print(Data_MKL_Gamepad_push.DEG_Joy_R);
     Serial.print(" || ");
-    Serial.print(Data_MKL_Gamepad.RAD_Joy_R);
+    Serial.print(Data_MKL_Gamepad_push.RAD_Joy_R);
     Serial.print(" || ");
-    Serial.print(Data_MKL_Gamepad.pot_L);
+    Serial.print(Data_MKL_Gamepad_push.pot_L);
     Serial.print(" || ");
-    Serial.print(Data_MKL_Gamepad.pot_R);
+    Serial.print(Data_MKL_Gamepad_push.pot_R);
     Serial.print(" || ");
-    Serial.println(Data_MKL_Gamepad.buttons, BIN);
+    Serial.println(Data_MKL_Gamepad_push.buttons, BIN);
   }
 
   delay(10);

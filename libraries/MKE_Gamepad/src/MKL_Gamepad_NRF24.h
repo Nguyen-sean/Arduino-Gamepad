@@ -7,8 +7,7 @@
 #include <nRF24L01.h>
 #include <RF24.h>
 
-class MKL_Gamepad_NRF24
-{
+CREATE_TASK(MKL_Gamepad_NRF24)
 
 private:
     uint8_t Pin_CE;
@@ -28,6 +27,6 @@ public:
         RF24 radio(9, 10);
     }
     // void Se
-};
+END
 
 #endif

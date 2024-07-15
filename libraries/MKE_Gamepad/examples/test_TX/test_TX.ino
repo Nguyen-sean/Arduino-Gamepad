@@ -13,7 +13,7 @@
 #include "MKL_Gamepad.h"
 
 MKL_Gamepad Gamepad;
-MKL_Gamepad_NRF24 MKL_NRF24;
+// MKL_Gamepad_NRF24 MKL_NRF24;
 
 RF24 radio(9, 10);              // CE, CSN
 const byte diachi[6] = "12345"; // Mảng kí tự dạng chuỗi có 6 kí tự
@@ -21,6 +21,20 @@ const byte diachi[6] = "12345"; // Mảng kí tự dạng chuỗi có 6 kí tự
 void setup()
 {
   Serial.begin(115200);
+  // Gamepad.SET_Pin_Joystick_Ox_Left(A0);
+  // Gamepad.SET_Pin_Joystick_Oy_Left(A1);
+  // Gamepad.SET_Pin_Joystick_Button_Left(1);
+  // Gamepad.SET_Pin_Joystick_Ox_Right(A2);
+  // Gamepad.SET_Pin_Joystick_Oy_Right(A3);
+  // Gamepad.SET_Pin_Joystick_Button_Right(0);
+  // Gamepad.SET_Pin_Pot_left(A7);
+  // Gamepad.SET_Pin_Pot_right(A6);
+  // Gamepad.SET_button_1(4);
+  // Gamepad.SET_button_2(5);
+  // Gamepad.SET_button_3(6);
+  // Gamepad.SET_button_4(7);
+  // Gamepad.SET_button_90D_Left(2);
+  // Gamepad.SET_button_90D_Right(3);
   Gamepad.Setup_Gamepad();
 
   while (!radio.begin())
@@ -69,11 +83,11 @@ void loop()
 {
 
   Gamepad.getdata_Gamepad();
-  radio.write(&Gamepad.Data_MKL_Gamepad, sizeof(Gamepad.Data_MKL_Gamepad));
+  radio.write(&Gamepad.Data_MKL_Gamepad_push_push, sizeof(Gamepad.Data_MKL_Gamepad_push_push));
   // &: Trả lại địa chỉ của một biến.
   // sizeof: trả về số byte bộ nhớ của một biến
   // hoặc là trả về tổng số byte bộ nhớ của một mảng
 
-  // Serial.println(Data_MKL_Gamepad.buttons,BIN);
+  // Serial.println(Data_MKL_Gamepad_push_push.buttons,BIN);
   // delay(1000);
 }

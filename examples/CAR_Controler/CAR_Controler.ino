@@ -48,10 +48,10 @@ void setup()
 
 void loop()
 {
-  // Wire.requestFrom(8, sizeof(Gamepad.Data_MKL_Gamepad));
+  // Wire.requestFrom(8, sizeof(Gamepad.Data_MKL_Gamepad_push));
   // while (Wire.available())
   // { // slave may send less than requested
-  //   Wire.readBytes((char *)&Gamepad.Data_MKL_Gamepad, sizeof(Gamepad.Data_MKL_Gamepad));
+  //   Wire.readBytes((char *)&Gamepad.Data_MKL_Gamepad_push, sizeof(Gamepad.Data_MKL_Gamepad_push));
   //   // Serial.print(Gamepad.Get_DEG_Joy_L());
   //   // Serial.print(" || ");
   //   // Serial.print(Gamepad.Get_RAD_Joy_L());

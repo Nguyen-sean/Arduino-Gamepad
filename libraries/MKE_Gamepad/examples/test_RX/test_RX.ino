@@ -14,7 +14,6 @@
 
 #include <Wire.h>
 
-
 MKL_Gamepad Gamepad;
 
 RF24 radio(9, 10); // CE, CSN
@@ -52,20 +51,20 @@ void loop()
 {
   if (radio.available())
   {
-    radio.read(&Gamepad.Data_MKL_Gamepad, sizeof(Gamepad.Data_MKL_Gamepad));
-    Serial.print(Gamepad.Data_MKL_Gamepad.DEG_Joy_L);
+    radio.read(&Gamepad.Data_MKL_Gamepad_push, sizeof(Gamepad.Data_MKL_Gamepad_push));
+    Serial.print(Gamepad.Data_MKL_Gamepad_push.DEG_Joy_L);
     Serial.print(" || ");
-    Serial.print(Gamepad.Data_MKL_Gamepad.RAD_Joy_L);
+    Serial.print(Gamepad.Data_MKL_Gamepad_push.RAD_Joy_L);
     Serial.print(" ||<==>|| ");
-    Serial.print(Gamepad.Data_MKL_Gamepad.DEG_Joy_R);
+    Serial.print(Gamepad.Data_MKL_Gamepad_push.DEG_Joy_R);
     Serial.print(" || ");
-    Serial.print(Gamepad.Data_MKL_Gamepad.RAD_Joy_R);
+    Serial.print(Gamepad.Data_MKL_Gamepad_push.RAD_Joy_R);
     Serial.print(" || ");
-    Serial.print(Gamepad.Data_MKL_Gamepad.pot_L);
+    Serial.print(Gamepad.Data_MKL_Gamepad_push.pot_L);
     Serial.print(" || ");
-    Serial.print(Gamepad.Data_MKL_Gamepad.pot_R);
+    Serial.print(Gamepad.Data_MKL_Gamepad_push.pot_R);
     Serial.print(" || ");
-    Serial.println(Gamepad.Data_MKL_Gamepad.buttons, BIN);
+    Serial.println(Gamepad.Data_MKL_Gamepad_push.buttons, BIN);
     lastReceivedTime = millis();
   }
 
@@ -78,5 +77,5 @@ void loop()
 
 void requestEvent()
 {
-    Wire.write((byte *)&Gamepad.Data_MKL_Gamepad, sizeof(Gamepad.Data_MKL_Gamepad));
+  Wire.write((byte *)&Gamepad.Data_MKL_Gamepad_push, sizeof(Gamepad.Data_MKL_Gamepad_push));
 }

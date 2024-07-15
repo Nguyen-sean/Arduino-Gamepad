@@ -3,8 +3,7 @@
 
 #include "Arduino.h"
 
-class MKL_Gamepad_joystick
-{
+CREATE_TASK(MKL_Gamepad_joystick)
 private:
     uint8_t joystickXPin; // Chân analog cho trục X của joystick
     uint8_t joystickYPin; // Chân analog cho trục Y của joystick
@@ -33,6 +32,6 @@ public:
     int Radius_approximately(uint8_t num_approximately);
 
     void Serial_debug();
-};
+END
 
 #endif
