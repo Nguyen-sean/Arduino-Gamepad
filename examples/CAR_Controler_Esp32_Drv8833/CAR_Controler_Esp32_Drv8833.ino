@@ -29,6 +29,7 @@ const int motor3_in2 = 25;
 const int motor4_in1 = 16;
 const int motor4_in2 = 17;
 
+int ratio_map = 10;
 void Motor_RUN(int Choose_Motor, int direction, int _speed);
 
 void forward();
@@ -50,6 +51,7 @@ char servo_compare = 'B';
 char servo_compare_s = 'A';
 void setup() {
   Wire.begin(21, 22);  // join I2C bus (address optional for master)
+  Wire.setClock(100000);
   Serial.begin(115200);
 
   pinMode(motor1_in1, OUTPUT);
@@ -64,17 +66,6 @@ void setup() {
   delay(100);
 }
 
-struct DataPacket
-{
-    byte buttons;
-    int DEG_Joy_L;
-    int RAD_Joy_L;
-    int RAD_Joy_R;
-    int DEG_Joy_R;
-    int pot_L;
-    int pot_R;
-    // bool Is_connect_NRF;
-} Data_MKL_Gamepad_esp32;
 
 
 void loop() {
@@ -84,19 +75,19 @@ void loop() {
   // while (Wire.available())
   // { // slave may send less than requested
   // Wire.readBytes((char *)&Gamepad.Data_MKL_Gamepad_push, sizeof(Gamepad.Data_MKL_Gamepad_push));
-  Serial.print(Gamepad.Get_DEG_Joy_L());
-  Serial.print(" || ");
-  Serial.print(Gamepad.Get_RAD_Joy_L());
-  Serial.print(" ||<==>|| ");
-  Serial.print(Gamepad.Get_DEG_Joy_R());
-  Serial.print(" || ");
-  Serial.print(Gamepad.Get_RAD_Joy_R());
-  Serial.print(" || ");
-  Serial.print(Gamepad.Get_POT_L());
-  Serial.print(" || ");
-  Serial.print(Gamepad.Get_POT_R());
-  Serial.print(" || ");
-  Serial.println(Gamepad.Get_status_button_90D_Right());
+    Serial.print(Gamepad.Data_MKL_Gamepad_push.DEG_Joy_L);
+    Serial.print(" || ");
+    Serial.print(Gamepad.Data_MKL_Gamepad_push.RAD_Joy_L);
+    Serial.print(" ||<==>|| ");
+    Serial.print(Gamepad.Data_MKL_Gamepad_push.DEG_Joy_R);
+    Serial.print(" || ");
+    Serial.print(Gamepad.Data_MKL_Gamepad_push.RAD_Joy_R);
+    Serial.print(" || ");
+    Serial.print(Gamepad.Data_MKL_Gamepad_push.pot_L);
+    Serial.print(" || ");
+    Serial.print(Gamepad.Data_MKL_Gamepad_push.pot_R);
+    Serial.print(" || ");
+    Serial.println(Gamepad.Data_MKL_Gamepad_push.buttons, BIN);
   // }
   // Speed_MT = 30;
   // forward();
@@ -130,8 +121,8 @@ void loop() {
   // delay(2000);
   // left();
   // delay(2000);
-  if (Gamepad.Get_RAD_Joy_L() > 30) {
-    Speed_MT = map(Gamepad.Get_RAD_Joy_L(), 15, 512, 50, 255);
+  if (Gamepad.Get_RAD_Joy_L() > 10) {
+    Speed_MT = Gamepad.Get_RAD_Joy_L();
   } else {
     Speed_MT = 0;
     Stop();
@@ -255,26 +246,26 @@ void right() {
 void forwardleft() {
   Motor_RUN(Motor_1, Clockwise, Speed_MT);
   Motor_RUN(Motor_2, Clockwise, Speed_MT);
-  Motor_RUN(Motor_3, Clockwise, Speed_MT / 3);
-  Motor_RUN(Motor_4, Clockwise, Speed_MT / 3);
+  Motor_RUN(Motor_3, Clockwise, Speed_MT / ratio_map);
+  Motor_RUN(Motor_4, Clockwise, Speed_MT / ratio_map);
 }
 void forwardright() {
-  Motor_RUN(Motor_1, Clockwise, Speed_MT / 3);
-  Motor_RUN(Motor_2, Clockwise, Speed_MT / 3);
+  Motor_RUN(Motor_1, Clockwise, Speed_MT / ratio_map);
+  Motor_RUN(Motor_2, Clockwise, Speed_MT / ratio_map);
   Motor_RUN(Motor_3, Clockwise, Speed_MT);
   Motor_RUN(Motor_4, Clockwise, Speed_MT);
 }
 void backright() {
-  Motor_RUN(Motor_1, Counter_Clockwise, Speed_MT / 3);
-  Motor_RUN(Motor_2, Counter_Clockwise, Speed_MT / 3);
+  Motor_RUN(Motor_1, Counter_Clockwise, Speed_MT / ratio_map);
+  Motor_RUN(Motor_2, Counter_Clockwise, Speed_MT / ratio_map);
   Motor_RUN(Motor_3, Counter_Clockwise, Speed_MT);
   Motor_RUN(Motor_4, Counter_Clockwise, Speed_MT);
 }
 void backleft() {
   Motor_RUN(Motor_1, Counter_Clockwise, Speed_MT);
   Motor_RUN(Motor_2, Counter_Clockwise, Speed_MT);
-  Motor_RUN(Motor_3, Counter_Clockwise, Speed_MT / 3);
-  Motor_RUN(Motor_4, Counter_Clockwise, Speed_MT / 3);
+  Motor_RUN(Motor_3, Counter_Clockwise, Speed_MT / ratio_map);
+  Motor_RUN(Motor_4, Counter_Clockwise, Speed_MT / ratio_map);
 }
 
 void Stop() {

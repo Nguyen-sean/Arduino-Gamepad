@@ -11,15 +11,14 @@
  * MISO - 12 SPI
  */
 #include "MKL_Gamepad.h"
-
+#define AVR
 MKL_Gamepad Gamepad;
 // MKL_Gamepad_NRF24 MKL_NRF24;
 
-RF24 radio(9, 10);              // CE, CSN
-const byte diachi[6] = "12345"; // Mảng kí tự dạng chuỗi có 6 kí tự
+RF24 radio(9, 10);               // CE, CSN
+const byte diachi[6] = "12345";  // Mảng kí tự dạng chuỗi có 6 kí tự
 
-void setup()
-{
+void setup() {
   Serial.begin(115200);
   // Gamepad.SET_Pin_Joystick_Ox_Left(A0);
   // Gamepad.SET_Pin_Joystick_Oy_Left(A1);
@@ -37,8 +36,7 @@ void setup()
   // Gamepad.SET_button_90D_Right(3);
   Gamepad.Setup_Gamepad();
 
-  while (!radio.begin())
-  {
+  while (!radio.begin()) {
     Serial.println("Module không khởi động được...!!");
     delay(10);
   }
@@ -53,14 +51,14 @@ void setup()
   // RF24_PA_HIGH
   // RF24_PA_MAX
   // Power of NRF24 at MIN, MAX, HIGH, LOW
-  radio.setChannel(80); // 125 kênh từ 0-124; TX và RX phải cùng kênh
-                        // 2.4GHz ~ 2400Mhz, bước kênh là 1MHz
-                        // setchannel(1) => 2401Mhz
-                        // Cao nhất là 2525MHz, Tức là 2.525GHz
+  radio.setChannel(80);  // 125 kênh từ 0-124; TX và RX phải cùng kênh
+                         // 2.4GHz ~ 2400Mhz, bước kênh là 1MHz
+                         // setchannel(1) => 2401Mhz
+                         // Cao nhất là 2525MHz, Tức là 2.525GHz
 
-  radio.setDataRate(RF24_250KBPS); // Tốc độ truyền dữ liệu trong không khí
-                                   // 250kbps, 1Mbps hoặc 2Mbps
-                                   // 250 thấp nhất nhưng truyền xa, 1Mb và 2Mb mạnh nhưng truyền không xa
+  radio.setDataRate(RF24_250KBPS);  // Tốc độ truyền dữ liệu trong không khí
+                                    // 250kbps, 1Mbps hoặc 2Mbps
+                                    // 250 thấp nhất nhưng truyền xa, 1Mb và 2Mb mạnh nhưng truyền không xa
   /*
    * Tốc độ truyền dữ liệu không khí 2Mbps, băng thông 2MHz bị chiếm dụng nhiều tần số kênh
    * rộng hơn độ phân giải của cài đặt tần số kênh RF
@@ -70,20 +68,20 @@ void setup()
    * A: Xe TX-RX kênh 80, tốc độ truyền là 2Mb 80, 81, 82
    * B: Máy bay TX-RX kênh 83, tốc độ truyền là 250Kb
    */
-  radio.stopListening(); // Cài đặt module là TX
+  radio.stopListening();  // Cài đặt module là TX
 
-  if (!radio.available())
-  {
+  if (!radio.available()) {
     Serial.println("Chưa kết nối được với RX...!!");
     Serial.println("CHỜ KẾT NỐI.......");
   }
 }
 
-void loop()
-{
+void loop() {
 
   Gamepad.getdata_Gamepad();
+  // Gamepad.senddata_Gamepad_I2C();
   radio.write(&Gamepad.Data_MKL_Gamepad_push, sizeof(Gamepad.Data_MKL_Gamepad_push));
+
   // &: Trả lại địa chỉ của một biến.
   // sizeof: trả về số byte bộ nhớ của một biến
   // hoặc là trả về tổng số byte bộ nhớ của một mảng
@@ -91,3 +89,4 @@ void loop()
   // Serial.println(Data_MKL_Gamepad_push.buttons,BIN);
   // delay(1000);
 }
+

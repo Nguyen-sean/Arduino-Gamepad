@@ -45,15 +45,16 @@ byte buttonStates = 0;
 struct DataPacket
 {
     byte buttons;
-    int DEG_Joy_L;
-    int RAD_Joy_L;
-    int RAD_Joy_R;
-    int DEG_Joy_R;
-    int pot_L;
-    int pot_R;
+    uint8_t DEG_Joy_L;
+    uint8_t RAD_Joy_L;
+    uint8_t RAD_Joy_R;
+    uint8_t DEG_Joy_R;
+    uint8_t pot_L;
+    uint8_t pot_R;
     // bool Is_connect_NRF;
 } Data_MKL_Gamepad_push;
 
+struct DataPacket *__Gamepad_Data__ = &Data_MKL_Gamepad_push;
 /*
 ###########################################################
 -------------------Config_Pinout_Gamepad-------------------
@@ -104,7 +105,6 @@ void SET_button_90D_Right(uint8_t _pin_Input) { this->button_90D_Right = _pin_In
 //----------------------------------------
 const int buttonPins[8] = {button_1, button_2, button_3, button_4, button_90D_Left, button_90D_Right, Pin_Joystick_Button_Left, Pin_Joystick_Button_Right};
 
-
 //----------------------------------------------------------
 
 void Setup_Gamepad()
@@ -132,12 +132,12 @@ void getdata_Gamepad()
     bitWrite(buttonStates, 7, digitalRead(Pin_Joystick_Button_Right));
 
     Data_MKL_Gamepad_push.buttons = buttonStates;
-    Data_MKL_Gamepad_push.DEG_Joy_L = joystick_L.AngleDed();
-    Data_MKL_Gamepad_push.RAD_Joy_L = joystick_L.Radius();
-    Data_MKL_Gamepad_push.DEG_Joy_R = joystick_R.AngleDed();
-    Data_MKL_Gamepad_push.RAD_Joy_R = joystick_R.Radius();
-    Data_MKL_Gamepad_push.pot_L = Potential_L.readValue();
-    Data_MKL_Gamepad_push.pot_R = Potential_R.readValue();
+    Data_MKL_Gamepad_push.DEG_Joy_L = map(joystick_L.AngleDed(),0,359,0,255);
+    Data_MKL_Gamepad_push.RAD_Joy_L = map(joystick_L.Radius(),0,512,0,255);
+    Data_MKL_Gamepad_push.DEG_Joy_R = map(joystick_R.AngleDed(),0,359,0,255);
+    Data_MKL_Gamepad_push.RAD_Joy_R = map(joystick_R.Radius(),0,512,0,255);
+    Data_MKL_Gamepad_push.pot_L = map(Potential_L.readValue(),0,1024,0,255);
+    Data_MKL_Gamepad_push.pot_R = map(Potential_R.readValue(),0,1024,0,255);
 }
 #endif
 void Reset_data_Gamepad() // đưa tất cả giá trị về low
@@ -162,10 +162,10 @@ void Reset_data_Gamepad() // đưa tất cả giá trị về low
     // Serial.println( Potential_R.readValue());
 }
 
-int Get_POT_L() { return Data_MKL_Gamepad_push.pot_L; }
-int Get_POT_R() { return Data_MKL_Gamepad_push.pot_R; }
-int Get_DEG_Joy_L() { return Data_MKL_Gamepad_push.DEG_Joy_L; }
-int Get_DEG_Joy_R() { return Data_MKL_Gamepad_push.DEG_Joy_R; }
+int Get_POT_L() { return map(Data_MKL_Gamepad_push.pot_L,0,255,0,1024); }
+int Get_POT_R() { return map(Data_MKL_Gamepad_push.pot_R,0,255,0,1024); }
+int Get_DEG_Joy_L() { return map(Data_MKL_Gamepad_push.DEG_Joy_L,0,255,0,359); }
+int Get_DEG_Joy_R() { return map(Data_MKL_Gamepad_push.DEG_Joy_R,0,255,0,359); }
 int Get_RAD_Joy_L() { return Data_MKL_Gamepad_push.RAD_Joy_L; }
 int Get_RAD_Joy_R() { return Data_MKL_Gamepad_push.RAD_Joy_R; }
 bool Get_status_button_1() { return !bitRead(Data_MKL_Gamepad_push.buttons, 0); }
@@ -177,12 +177,52 @@ bool Get_status_button_90D_Right() { return !bitRead(Data_MKL_Gamepad_push.butto
 bool Get_status_Joystick_Button_Left() { return !bitRead(Data_MKL_Gamepad_push.buttons, 6); }
 bool Get_status_Joystick_Button_Right() { return !bitRead(Data_MKL_Gamepad_push.buttons, 7); }
 
+void senddata_Gamepad_I2C()
+{
+    Wire.beginTransmission(I2C_ADDRESS); // transmit to device #8
+
+    Wire.write(__Gamepad_Data__->pot_L);
+    Wire.write(__Gamepad_Data__->pot_R);
+    Wire.write(__Gamepad_Data__->DEG_Joy_L);
+    Wire.write(__Gamepad_Data__->DEG_Joy_R);
+    Wire.write(__Gamepad_Data__->RAD_Joy_L);
+    Wire.write(__Gamepad_Data__->RAD_Joy_R);
+    Wire.write(__Gamepad_Data__->buttons);
+    Wire.endTransmission(); // stop transmitting
+}
+
 void getdata_Gamepad_I2C()
 {
     Wire.requestFrom(I2C_ADDRESS, sizeof(Data_MKL_Gamepad_push));
+
     while (Wire.available())
     { // slave may send less than requested
-        Wire.readBytes((char *)&Data_MKL_Gamepad_push, sizeof(Data_MKL_Gamepad_push));
+        //   Wire.readBytes((char *)&Data_MKL_Gamepad_push, sizeof(Data_MKL_Gamepad_push));
+
+        byte *dataPtr = (byte *)&Data_MKL_Gamepad_push; // Con trỏ tới dữ liệu
+
+        for (int i = 0; i < sizeof(Data_MKL_Gamepad_push); i++)
+        {
+            dataPtr[i] = Wire.read(); // Đọc từng byte dữ liệu từ Arduino Uno
+        }
+
+        // __Gamepad_Data__->pot_L = Wire.read();
+        // __Gamepad_Data__->pot_R = Wire.read();
+        // __Gamepad_Data__->DEG_Joy_L = Wire.read();
+        // __Gamepad_Data__->DEG_Joy_R = Wire.read();
+        // __Gamepad_Data__->RAD_Joy_L = Wire.read();
+        // __Gamepad_Data__->RAD_Joy_R = Wire.read();
+        // __Gamepad_Data__->buttons = Wire.read();
+
+        // Data_MKL_Gamepad_push.pot_L = Wire.read();
+        // Data_MKL_Gamepad_push.pot_R = Wire.read();
+        // Data_MKL_Gamepad_push.DEG_Joy_L = Wire.read();
+        // Data_MKL_Gamepad_push.DEG_Joy_R = Wire.read();
+
+        // Data_MKL_Gamepad_push.RAD_Joy_L = Wire.read();
+        // Data_MKL_Gamepad_push.RAD_Joy_R = Wire.read();
+
+        // Data_MKL_Gamepad_push.buttons = Wire.read();
     }
 }
 

@@ -12,6 +12,7 @@
  */
 #include "MKL_Gamepad.h"
 
+#define AVR
 #include <Wire.h>
 
 MKL_Gamepad Gamepad;
@@ -78,4 +79,5 @@ void loop()
 void requestEvent()
 {
   Wire.write((byte *)&Gamepad.Data_MKL_Gamepad_push, sizeof(Gamepad.Data_MKL_Gamepad_push));
+  // Gamepad.senddata_Gamepad_I2C();
 }
