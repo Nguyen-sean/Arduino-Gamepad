@@ -7,7 +7,8 @@
 #include <nRF24L01.h>
 #include <RF24.h>
 
-CREATE_TASK(MKL_Gamepad_NRF24)
+class MKL_Gamepad_NRF24
+{
 
 private:
     uint8_t Pin_CE;
@@ -22,11 +23,11 @@ private:
 public:
     void RF_writing();
     void Change_address_RF();
-    void Config_NRF(uint8_t CE, uint8_t CSN, int Address, int SetPAlever, int Setchannel, int SetDataRate)
-    {
-        RF24 radio(9, 10);
-    }
+    // void Config_NRF(uint8_t CE, uint8_t CSN, int Address, int SetPAlever, int Setchannel, int SetDataRate)
+    // {
+    //     RF24 radio(9, 10);
+    // }
     // void Se
-END
+};
 
 #endif

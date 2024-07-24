@@ -83,11 +83,11 @@ void loop()
 {
 
   Gamepad.getdata_Gamepad();
-  radio.write(&Gamepad.Data_MKL_Gamepad_push_push, sizeof(Gamepad.Data_MKL_Gamepad_push_push));
+  radio.write(&Gamepad.Data_MKL_Gamepad_push, sizeof(Gamepad.Data_MKL_Gamepad_push));
   // &: Trả lại địa chỉ của một biến.
   // sizeof: trả về số byte bộ nhớ của một biến
   // hoặc là trả về tổng số byte bộ nhớ của một mảng
 
-  // Serial.println(Data_MKL_Gamepad_push_push.buttons,BIN);
+  // Serial.println(Data_MKL_Gamepad_push.buttons,BIN);
   // delay(1000);
 }

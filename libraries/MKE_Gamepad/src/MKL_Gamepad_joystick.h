@@ -2,8 +2,10 @@
 #define MKL_Gamepad_joystick_SEAN__
 
 #include "Arduino.h"
+#include "kxnTask.h"
 
-CREATE_TASK(MKL_Gamepad_joystick)
+CREATE_TASK( MKL_Gamepad_joystick)
+
 private:
     uint8_t joystickXPin; // Chân analog cho trục X của joystick
     uint8_t joystickYPin; // Chân analog cho trục Y của joystick
