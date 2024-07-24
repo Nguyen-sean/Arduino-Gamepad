@@ -75,17 +75,17 @@ void loop() {
   // while (Wire.available())
   // { // slave may send less than requested
   // Wire.readBytes((char *)&Gamepad.Data_MKL_Gamepad_push, sizeof(Gamepad.Data_MKL_Gamepad_push));
-    Serial.print(Gamepad.Data_MKL_Gamepad_push.DEG_Joy_L);
+    Serial.print(Gamepad.Get_DEG_Joy_L());
     Serial.print(" || ");
     Serial.print(Gamepad.Data_MKL_Gamepad_push.RAD_Joy_L);
     Serial.print(" ||<==>|| ");
-    Serial.print(Gamepad.Data_MKL_Gamepad_push.DEG_Joy_R);
+    Serial.print(Gamepad.Get_DEG_Joy_R());
     Serial.print(" || ");
     Serial.print(Gamepad.Data_MKL_Gamepad_push.RAD_Joy_R);
     Serial.print(" || ");
-    Serial.print(Gamepad.Data_MKL_Gamepad_push.pot_L);
+    Serial.print(Gamepad.Get_POT_L());
     Serial.print(" || ");
-    Serial.print(Gamepad.Data_MKL_Gamepad_push.pot_R);
+    Serial.print(Gamepad.Get_POT_R());
     Serial.print(" || ");
     Serial.println(Gamepad.Data_MKL_Gamepad_push.buttons, BIN);
   // }

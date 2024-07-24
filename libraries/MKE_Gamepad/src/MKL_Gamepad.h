@@ -132,9 +132,9 @@ void getdata_Gamepad()
     bitWrite(buttonStates, 7, digitalRead(Pin_Joystick_Button_Right));
 
     Data_MKL_Gamepad_push.buttons = buttonStates;
-    Data_MKL_Gamepad_push.DEG_Joy_L = map(joystick_L.AngleDed(),0,359,0,255);
+    Data_MKL_Gamepad_push.DEG_Joy_L = map(joystick_L.AngleDed(),0,360,0,255);
     Data_MKL_Gamepad_push.RAD_Joy_L = map(joystick_L.Radius(),0,512,0,255);
-    Data_MKL_Gamepad_push.DEG_Joy_R = map(joystick_R.AngleDed(),0,359,0,255);
+    Data_MKL_Gamepad_push.DEG_Joy_R = map(joystick_R.AngleDed(),0,360,0,255);
     Data_MKL_Gamepad_push.RAD_Joy_R = map(joystick_R.Radius(),0,512,0,255);
     Data_MKL_Gamepad_push.pot_L = map(Potential_L.readValue(),0,1024,0,255);
     Data_MKL_Gamepad_push.pot_R = map(Potential_R.readValue(),0,1024,0,255);
@@ -164,8 +164,8 @@ void Reset_data_Gamepad() // đưa tất cả giá trị về low
 
 int Get_POT_L() { return map(Data_MKL_Gamepad_push.pot_L,0,255,0,1024); }
 int Get_POT_R() { return map(Data_MKL_Gamepad_push.pot_R,0,255,0,1024); }
-int Get_DEG_Joy_L() { return map(Data_MKL_Gamepad_push.DEG_Joy_L,0,255,0,359); }
-int Get_DEG_Joy_R() { return map(Data_MKL_Gamepad_push.DEG_Joy_R,0,255,0,359); }
+int Get_DEG_Joy_L() { return map(Data_MKL_Gamepad_push.DEG_Joy_L,0,255,0,360); }
+int Get_DEG_Joy_R() { return map(Data_MKL_Gamepad_push.DEG_Joy_R,0,255,0,360); }
 int Get_RAD_Joy_L() { return Data_MKL_Gamepad_push.RAD_Joy_L; }
 int Get_RAD_Joy_R() { return Data_MKL_Gamepad_push.RAD_Joy_R; }
 bool Get_status_button_1() { return !bitRead(Data_MKL_Gamepad_push.buttons, 0); }
