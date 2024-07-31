@@ -10,7 +10,7 @@ enum Motor_direction {
   Counter_Clockwise
 };
 
-enum Num_Motor {
+typedef enum Num_Motor {
   Motor_1,
   Motor_2,
   Motor_3,
