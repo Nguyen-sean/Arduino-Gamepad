@@ -11,9 +11,8 @@
  * MISO - 12 SPI
  */
 #include "MKL_Gamepad.h"
-#define AVR
-MKL_Gamepad Gamepad;
-// MKL_Gamepad_NRF24 MKL_NRF24;
+// #define AVR
+MKL_Gamepad_TX Gamepad;
 
 RF24 radio(9, 10);               // CE, CSN
 const byte diachi[6] = "12345";  // Mảng kí tự dạng chuỗi có 6 kí tự
@@ -81,7 +80,13 @@ void loop() {
   Gamepad.getdata_Gamepad();
   // Gamepad.senddata_Gamepad_I2C();
   radio.write(&Gamepad.Data_MKL_Gamepad_push, sizeof(Gamepad.Data_MKL_Gamepad_push));
-
+   
+// Gamepad.Serial_check_Gamepab();
+  if (radio.testRPD()) {
+    Serial.println("Strong signal detected (> -64dBm)");
+  } else {
+    Serial.println("Weak signal");
+  }
   // &: Trả lại địa chỉ của một biến.
   // sizeof: trả về số byte bộ nhớ của một biến
   // hoặc là trả về tổng số byte bộ nhớ của một mảng

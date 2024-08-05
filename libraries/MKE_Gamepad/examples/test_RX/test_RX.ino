@@ -74,6 +74,7 @@ void loop()
     Serial.println("NRF24L01 is disconnected");
     Gamepad.Reset_data_Gamepad();
   }
+  
 }
 
 void requestEvent()
