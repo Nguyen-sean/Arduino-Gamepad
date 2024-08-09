@@ -2,6 +2,7 @@
 #define MKL_Gamepad_RX_SEAN__
 #include "kxnTask.h"
 
+#define MKL_Gamepad_RX_
 
 CREATE_TASK(MKL_Gamepad_RX)
 

@@ -5,6 +5,8 @@
 #include "lib_Gamepad/MKL_Gamepad_joystick.h"
 #include "lib_Gamepad/MKL_Gamepad_Potential.h"
 
+#define MKL_Gamepad_TX_
+
 MKL_Gamepad_joystick joystick_L;
 MKL_Gamepad_joystick joystick_R;
 MKL_Gamepad_Potential Potential_L;
