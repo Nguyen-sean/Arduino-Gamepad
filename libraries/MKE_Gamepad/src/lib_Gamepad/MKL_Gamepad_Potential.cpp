@@ -2,7 +2,7 @@
 
 void MKL_Gamepad_Potential::setup(uint8_t pin)
 {
-    _pin = pin;
+    this->_pin = pin;
     pinMode(_pin, INPUT);
 }
 

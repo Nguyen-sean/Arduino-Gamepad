@@ -33,7 +33,7 @@ void setup() {
   // Gamepad.SET_button_4(7);
   // Gamepad.SET_button_90D_Left(2);
   // Gamepad.SET_button_90D_Right(3);
-  Gamepad.Setup_Gamepad();
+  Gamepad.Setup();
 
   while (!radio.begin()) {
     Serial.println("Module không khởi động được...!!");
@@ -82,11 +82,7 @@ void loop() {
   radio.write(&Gamepad.Data_MKL_Gamepad_push, sizeof(Gamepad.Data_MKL_Gamepad_push));
    
 // Gamepad.Serial_check_Gamepab();
-  if (radio.testRPD()) {
-    Serial.println("Strong signal detected (> -64dBm)");
-  } else {
-    Serial.println("Weak signal");
-  }
+
   // &: Trả lại địa chỉ của một biến.
   // sizeof: trả về số byte bộ nhớ của một biến
   // hoặc là trả về tổng số byte bộ nhớ của một mảng

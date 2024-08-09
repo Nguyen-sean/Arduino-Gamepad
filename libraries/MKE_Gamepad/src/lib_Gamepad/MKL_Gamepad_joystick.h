@@ -4,7 +4,7 @@
 #include "Arduino.h"
 #include "kxnTask.h"
 
-CREATE_TASK( MKL_Gamepad_joystick)
+CREATE_TASK(MKL_Gamepad_joystick)
 
 private:
     uint8_t joystickXPin; // Chân analog cho trục X của joystick

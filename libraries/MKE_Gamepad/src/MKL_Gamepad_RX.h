@@ -97,7 +97,7 @@ void getdata_Gamepad_I2C()
 
         byte *dataPtr = (byte *)&Data_MKL_Gamepad_push; // Con trỏ tới dữ liệu
 
-        for (int i = 0; i < sizeof(Data_MKL_Gamepad_push); i++)
+        for (size_t  i = 0; i < sizeof(Data_MKL_Gamepad_push); i++)
         {
             dataPtr[i] = Wire.read(); // Đọc từng byte dữ liệu từ Arduino Uno
         }
