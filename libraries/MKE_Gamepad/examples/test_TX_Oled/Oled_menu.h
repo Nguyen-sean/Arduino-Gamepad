@@ -83,9 +83,9 @@ void loop()
     {
     case Oled_menu_1:
         pre();
-        u8x8.drawString(0, 2, "Test Game pad");
+        u8x8.drawString(0, 2, "Test Gamepad");
         u8x8.setFont(u8x8_font_px437wyse700b_2x2_r);
-        u8x8.drawString(0, 5, "2x2 Font");
+        u8x8.drawString(0, 5, "Hshop.vn");
 
         setState(Oled_menu_2);
         kDelay(time1_);
