@@ -23,7 +23,7 @@ uint8_t I2C_ADDRESS = 0x08;
 
 #include "MKL_Gamepad_TX.h"
 #include "MKL_Gamepad_RX.h"
-#include "MKL_Gamepad_I2C_device.h"
+//#include "MKL_Gamepad_I2C_device.h"
 
 
 
